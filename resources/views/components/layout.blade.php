@@ -8,7 +8,7 @@
     <title>{{ $title ?? 'To-Do List Application'}}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
+<body class="bg-white dark:bg-gray-950">
     {{ $slot }}
 </body>
 </html>
