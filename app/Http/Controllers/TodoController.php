@@ -59,16 +59,24 @@ class TodoController extends Controller
      * Update the specified resource in storage.
      */
     // Route model binding instead of $request and $id
-    public function update(Todo $todo)
+    public function update(Request $request, Todo $todo)
     {
+        $validated = $request->validate([
+            'title' => 'required|min:20',
+        ]);
 
+        $todo->update($validated);
+
+        return redirect()->route('todos.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Todo $todo)
     {
-        //
+        $todo->delete();
+
+        return redirect()->route('todos.index');
     }
 }

@@ -1,21 +1,19 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\links;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Layout extends Component
+class Outline extends Component
 {
-    public string $title;
-
     /**
      * Create a new component instance.
      */
-    public function __construct(string $title)
+    public function __construct()
     {
-        $this->title = $title;
+        //
     }
 
     /**
@@ -23,6 +21,6 @@ class Layout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.layout');
+        return view('components.links.outline');
     }
 }

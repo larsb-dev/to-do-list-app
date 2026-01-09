@@ -2,7 +2,6 @@
     <div class="flex items-center justify-end">
         <span class="px-3 py-1 text-xs text-blue-800 uppercase bg-blue-200 rounded-full dark:bg-blue-300 dark:text-blue-900">{{ $todo->category }}</span>
     </div>
-
     <div>
         <h2 class="mt-2 text-lg font-semibold text-gray-800 dark:text-white">{{ $todo->title }}</h2>
         <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">{{ $todo->description }}</p>
@@ -19,16 +18,13 @@
 {{--            @endforeach--}}
 {{--        </div>--}}
         <div class="flex items-center justify-between mt-4">
-{{--            <form action="{{ route('todo') }}" method="POST" class="inline">--}}
-{{--                @csrf--}}
-{{--                @method('PATCH')--}}
-{{--                <x-buttons.outline>Done</x-buttons.outline>--}}
-{{--            </form>--}}
-{{--            Edit button should be link not form--}}
-            <form action="{{ route('todos.edit', $todo->id) }}" method="GET">
+            <form action="{{ route('todos.destroy', $todo) }}" method="POST">
                 @csrf
-                <x-buttons.primary>Edit</x-buttons.primary>
+                @method('DELETE')
+                <x-buttons.filled>Done</x-buttons.filled>
             </form>
+{{--            <x-links.outline href="{{ route('todos.edit', $todo->id) }}">Edit</x-links.outline>--}}
+            <x-buttons.outline @click="$dispatch('foo', {{ Js::from($todo) }})">Edit</x-buttons.outline>
         </div>
     </div>
 </div>
