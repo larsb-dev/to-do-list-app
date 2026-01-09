@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Todo;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -26,7 +27,9 @@ class TodoController extends Controller
      */
     public function create()
     {
-        //
+        return view('todos.create', [
+            'title' => 'Add'
+        ]);
     }
 
     /**
@@ -34,15 +37,22 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated =  $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+        ]);
+
+        $todo = Todo::create($validated);
+
+        return redirect()->route('todos.show', $todo);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Todo $todo)
     {
-        //
+        return redirect()->route('todos.index');
     }
 
     /**
@@ -64,7 +74,7 @@ class TodoController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required',
-            'description' => 'required|max:255',
+            'description' => 'required|max:10',
         ]);
 
         $todo->update($validated);

@@ -4,7 +4,7 @@
     </div>
     <div>
         <h2 class="mt-2 text-lg font-semibold text-gray-800 dark:text-white">{{ $todo->title }}</h2>
-        <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">{{ $todo->description }}</p>
+        <x-expandable-text :text="$todo->description" />
     </div>
 
     <div>

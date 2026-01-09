@@ -1,6 +1,6 @@
 <x-layout :title="$title">
     <x-container>
-        <h1 class="text-3xl dark:text-blue-400 text-gray-700 my-10 font-bold tracking-wide">
+        <h1 class="text-3xl dark:text-blue-300 text-gray-700 my-10 font-bold tracking-wide">
             @if ($todos->isNotEmpty())
                 You have {{ $todos->count() }} {{ Str::plural('ToDo', $todos->count()) }}
             @else

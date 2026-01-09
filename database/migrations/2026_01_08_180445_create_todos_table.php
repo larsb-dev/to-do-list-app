@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('category');
+            $table->string('category')->nullable();
             $table->string('description');
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

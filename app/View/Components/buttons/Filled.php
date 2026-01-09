@@ -6,14 +6,16 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Primary extends Component
+class Filled extends Component
 {
+    public string $primary;
+
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(bool $primary = true)
     {
-        //
+        $this->primary = $primary;
     }
 
     /**
