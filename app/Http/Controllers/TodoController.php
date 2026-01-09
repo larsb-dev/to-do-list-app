@@ -16,7 +16,7 @@ class TodoController extends Controller
         $todos = Todo::select(['id', 'title', 'category', 'description', 'status'])->get();
 
         return view('todos.index', [
-            'title' => 'Todos Manager',
+            'title' => 'Todos Index',
             'todos' => $todos
         ]);
     }
@@ -51,7 +51,8 @@ class TodoController extends Controller
     public function edit(Todo $todo)
     {
         return view('todos.edit', [
-            'todo' => $todo
+            'title' => 'Todos Edit',
+            'todo' => $todo,
         ]);
     }
 
@@ -62,7 +63,8 @@ class TodoController extends Controller
     public function update(Request $request, Todo $todo)
     {
         $validated = $request->validate([
-            'title' => 'required|min:20',
+            'title' => 'required',
+            'description' => 'required|max:255',
         ]);
 
         $todo->update($validated);

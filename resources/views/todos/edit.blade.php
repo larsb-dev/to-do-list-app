@@ -1,3 +1,5 @@
-<div class="absolute w-1/2 h-screen">
-    <p>This will be a beautiful edit modal form</p>
-</div>
+<x-layout :title='$title'>
+    <x-container>
+        <x-form :todo="$todo" />
+    </x-container>
+</x-layout>

@@ -23,8 +23,7 @@
                 @method('DELETE')
                 <x-buttons.filled>Done</x-buttons.filled>
             </form>
-{{--            <x-links.outline href="{{ route('todos.edit', $todo->id) }}">Edit</x-links.outline>--}}
-            <x-buttons.outline @click="$dispatch('foo', {{ Js::from($todo) }})">Edit</x-buttons.outline>
+            <x-links.outline href="{{ route('todos.edit', $todo) }}">Edit</x-links.outline>
         </div>
     </div>
 </div>
