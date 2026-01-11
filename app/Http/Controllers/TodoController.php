@@ -13,7 +13,7 @@ class TodoController extends Controller
      */
     public function index(Request $request)
     {
-//        n+1 problem
+//        N+1 problem, not eager loaded
 //        $todos = Todo::select(['id', 'title', 'description', 'status_id']);
 
         $todos = Todo::with('status')->select(['id', 'title', 'description', 'status_id']);
