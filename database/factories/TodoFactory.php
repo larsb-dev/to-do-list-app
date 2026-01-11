@@ -18,9 +18,8 @@ class TodoFactory extends Factory
     {
         return [
             'title' => fake()->company(),
-            'category' => fake()->randomElement(['development', 'testing']),
-            'description' => fake()->sentence(),
-            'status' => fake()->randomElement(['in_progress', 'completed']),
+            'description' => fake()->sentence(20),
+            'status' => fake()->randomElement(['not_started', 'in_progress', 'completed']),
         ];
     }
 }

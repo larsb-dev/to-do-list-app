@@ -3,22 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Todo;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class TodoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $todos = Todo::select(['id', 'title', 'category', 'description', 'status'])->get();
+        $todos = Todo::select(['id', 'title', 'description', 'status']);
+
+        if ($request->status) {
+            $todos->where('status', $request->status);
+        }
+
+        $todos = $todos->simplePaginate(9);
 
         return view('todos.index', [
             'title' => 'Todos Index',
-            'todos' => $todos
+            'todos' => $todos,
         ]);
     }
 
@@ -38,13 +42,14 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         $validated =  $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'title' => 'required|max:80',
+            'description' => 'required|max:255',
+            'status' => 'required|string',
         ]);
 
-        $todo = Todo::create($validated);
+        Todo::create($validated);
 
-        return redirect()->route('todos.show', $todo);
+        return redirect()->route('todos.index')->with('status', 'Todo created successfully');
     }
 
     /**
@@ -73,9 +78,12 @@ class TodoController extends Controller
     public function update(Request $request, Todo $todo)
     {
         $validated = $request->validate([
-            'title' => 'required',
-            'description' => 'required|max:10',
+            'title' => 'required|max:80',
+            'description' => 'required|max:255',
+            'status' => 'required|string',
         ]);
+
+        dd($validated);
 
         $todo->update($validated);
 
