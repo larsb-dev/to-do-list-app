@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Status;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,7 @@ class TodoFactory extends Factory
         return [
             'title' => fake()->company(),
             'description' => fake()->sentence(20),
-            'status' => fake()->randomElement(['not_started', 'in_progress', 'completed']),
+            'status_id' => rand(1, 3),
         ];
     }
 }

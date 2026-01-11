@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Status;
 use App\Models\Todo;
 use Illuminate\Http\Request;
 
@@ -12,10 +13,14 @@ class TodoController extends Controller
      */
     public function index(Request $request)
     {
-        $todos = Todo::select(['id', 'title', 'description', 'status']);
+//        n+1 problem
+//        $todos = Todo::select(['id', 'title', 'description', 'status_id']);
+
+        $todos = Todo::with('status')->select(['id', 'title', 'description', 'status_id']);
 
         if ($request->status) {
-            $todos->where('status', $request->status);
+            $statusId = Status::where('name', $request->status)->value('id');
+            $todos->where('status_id', $statusId);
         }
 
         $todos = $todos->simplePaginate(9);
@@ -44,7 +49,7 @@ class TodoController extends Controller
         $validated =  $request->validate([
             'title' => 'required|max:80',
             'description' => 'required|max:255',
-            'status' => 'required|string',
+            'status_id' => 'required',
         ]);
 
         Todo::create($validated);
@@ -80,10 +85,8 @@ class TodoController extends Controller
         $validated = $request->validate([
             'title' => 'required|max:80',
             'description' => 'required|max:255',
-            'status' => 'required|string',
+            'status_id' => 'required',
         ]);
-
-        dd($validated);
 
         $todo->update($validated);
 
