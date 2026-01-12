@@ -28,9 +28,9 @@
 {{--            @endforeach--}}
 {{--        </div>--}}
         <div class="flex items-center justify-between mt-4">
-            <form action="{{ route('todos.destroy', $todo) }}" method="POST">
+            <form action="{{ route('todos.complete', $todo) }}" method="POST">
                 @csrf
-                @method('DELETE')
+                @method('PATCH')
                 <x-buttons.filled>Done</x-buttons.filled>
             </form>
             <x-links.outline href="{{ route('todos.edit', $todo) }}">Edit</x-links.outline>

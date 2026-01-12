@@ -102,4 +102,14 @@ class TodoController extends Controller
 
         return redirect()->route('todos.index');
     }
+
+    /**
+     * Mark the status of the specified resource as complete.
+     */
+    public function complete(Todo $todo)
+    {
+        $todo->update(['status_id' => 3]);
+
+        return redirect()->route('todos.index');
+    }
 }

@@ -2,21 +2,17 @@
 
 namespace App\View\Components;
 
-use App\Models\Todo;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Form extends Component
+class AuthForm extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public ?Todo $todo = null,
-        public string $title = '',
-        public string $action = '',
-        public string $method = 'POST'
+        public string $type = ''
     ) {}
 
     /**
@@ -24,6 +20,6 @@ class Form extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.form');
+        return view('components.auth-form');
     }
 }
