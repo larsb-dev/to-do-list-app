@@ -1,4 +1,4 @@
-# Laravel To-Do Management Tool
+# Laravel Task Management Tool
 
 A modern, full-featured todo list application built with Laravel 12, demonstrating best practices in web development including authentication, authorization, CRUD operations, and pagination with filtering.
 
