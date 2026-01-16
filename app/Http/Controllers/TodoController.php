@@ -23,7 +23,7 @@ class TodoController extends Controller
             $todos->where('status_id', $statusId);
         }
 
-        $todos = $todos->simplePaginate(9);
+        $todos = $todos->simplePaginate(9)->withQueryString();
 
         return view('todos.index', [
             'title' => 'Todos Index',

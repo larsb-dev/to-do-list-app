@@ -6,23 +6,20 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class AuthLayout extends Component
+class InputError extends Component
 {
-    public string $title;
-
     /**
      * Create a new component instance.
      */
-    public function __construct(string $title)
-    {
-        $this->title = $title;
-    }
+    public function __construct(
+        public array $messages = []
+    ) {}
 
     /**
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string
     {
-        return view('components.auth-layout');
+        return view('components.input-error');
     }
 }

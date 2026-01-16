@@ -1,59 +1,297 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel To-Do Management Tool
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern, full-featured todo list application built with Laravel 12, demonstrating best practices in web development including authentication, authorization, CRUD operations, and pagination with filtering.
 
-## About Laravel
+![Laravel](https://img.shields.io/badge/Laravel-12.0-FF2D20?style=flat&logo=laravel&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat&logo=php&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
+![Alpine.js](https://img.shields.io/badge/Alpine.js-3.15-8BC0D0?style=flat&logo=alpine.js&logoColor=white)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📋 Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Core Functionality
+- ✅ **CRUD Operations** - Create, Read, Update, and Delete todos
+- 🎯 **Status Management** - Track todos with three states: Not Started, In Progress, and Completed
+- 🔍 **Filtering** - Filter todos by status with query string preservation
+- 📄 **Pagination** - Simple pagination with 9 items per page
+- ⚡ **Quick Complete** - Mark todos as completed with a single click
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Authentication & Authorization
+- 🔐 **User Authentication** - Secure login and registration system
+- 👤 **Role-Based Access Control (RBAC)** - Custom middleware for role authorization
+- 🛡️ **Custom Authentication Middleware** - `EnsureUserIsAuthenticated` and `EnsureUserHasRole`
+- 🚪 **Protected Routes** - Guest and authenticated route groups
 
-## Learning Laravel
+### Technical Highlights
+- 🚀 **Optimized Queries** - Eager loading to prevent N+1 problems
+- 🎨 **Modern UI** - Built with TailwindCSS 4.0 and Alpine.js
+- 🧩 **Blade Components** - Reusable UI components
+- ✅ **Form Validation** - Server-side validation with Laravel's validation system
+- 🧪 **Testing Ready** - Configured with Pest PHP for testing
+- 🐛 **Debug Toolbar** - Laravel Debugbar for development
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 🛠️ Tech Stack
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Backend
+- **Laravel 12** - PHP framework
+- **PHP 8.2+** - Programming language
+- **SQLite** - Database (easily switchable to MySQL/PostgreSQL)
+- **Eloquent ORM** - Database abstraction
 
-## Laravel Sponsors
+### Frontend
+- **TailwindCSS 4.0** - Utility-first CSS framework
+- **Alpine.js 3.15** - Lightweight JavaScript framework
+- **Vite 7.0** - Frontend build tool
+- **Blade Templates** - Laravel's templating engine
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Development Tools
+- **Pest PHP 4.3** - Testing framework
+- **Laravel Pint** - Code style fixer
+- **Laravel Debugbar** - Debugging tool
+- **Laravel Pail** - Log viewer
+- **Concurrently** - Run multiple dev processes
 
-### Premium Partners
+## 📦 Installation
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Prerequisites
+- PHP 8.2 or higher
+- Composer
+- Node.js 18+ and npm
+- SQLite (or MySQL/PostgreSQL if you prefer)
 
-## Contributing
+### Quick Setup
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+# Clone the repository
+git clone <your-repository-url>
+cd to-do-list-app
 
-## Code of Conduct
+# Install dependencies and setup
+composer setup
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# This runs:
+# - composer install
+# - Copies .env.example to .env
+# - Generates application key
+# - Runs migrations
+# - npm install
+# - npm run build
+```
 
-## Security Vulnerabilities
+### Manual Setup
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+If you prefer to set up manually:
 
-## License
+```bash
+# Install PHP dependencies
+composer install
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Copy environment file
+cp .env.example .env
+
+# Generate application key
+php artisan key:generate
+
+# Create SQLite database file
+touch database/database.sqlite
+
+# Run migrations
+php artisan migrate
+
+# Seed the database (optional)
+php artisan db:seed
+
+# Install Node dependencies
+npm install
+
+# Build frontend assets
+npm run build
+```
+
+## 🚀 Running the Application
+
+### Development Mode (Recommended)
+
+Run all development services with a single command:
+
+```bash
+composer run dev
+```
+
+This runs concurrently:
+- **Laravel development server** (http://localhost:8000)
+- **Queue listener**
+- **Log viewer (Pail)**
+- **Vite dev server** (Hot Module Replacement)
+
+## 📖 Usage
+
+### Default User
+After running the seeder, you can log in with:
+- **Email:** test@example.com
+- **Password:** password
+
+### Managing Todos
+
+1. **Create a Todo**
+   - Click "Add New Todo" button
+   - Fill in the title, description, and select a status
+   - Submit the form
+
+2. **Filter Todos**
+   - Use the status filter buttons to view todos by status
+   - URL will reflect the current filter (e.g., `?status=not_started`)
+
+3. **Edit a Todo**
+   - Click the "Edit" button on any todo card
+   - Modify the details and save
+
+4. **Complete a Todo**
+   - Click the "Mark Complete" button to instantly set status to Completed
+
+5. **Delete a Todo**
+   - Click the "Delete" button and confirm
+
+### Status Types
+- **Not Started** - Todo hasn't been started yet
+- **In Progress** - Currently working on the todo
+- **Completed** - Todo is finished
+
+## 🏗️ Project Structure
+
+```
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── Auth/           # Authentication controllers
+│   │   │   └── TodoController.php
+│   │   └── Middleware/
+│   │       ├── EnsureUserHasRole.php
+│   │       └── EnsureUserIsAuthenticated.php
+│   └── Models/
+│       ├── Status.php          # Status model with constants
+│       ├── Todo.php            # Todo model
+│       └── User.php            # User model with role support
+├── database/
+│   ├── factories/              # Model factories
+│   ├── migrations/             # Database migrations
+│   └── seeders/                # Database seeders
+├── resources/
+│   ├── css/
+│   ├── js/
+│   └── views/
+│       ├── auth/               # Authentication views
+│       ├── components/         # Blade components
+│       ├── layouts/            # Layout templates
+│       └── todos/              # Todo views
+└── routes/
+    ├── auth.php                # Authentication routes
+    └── web.php                 # Web routes
+```
+
+## 🔑 Key Features Explained
+
+### Authentication System
+Custom authentication implementation with:
+- Registration with name, email, and password
+- Login/logout functionality
+- Protected routes using middleware
+- Session-based authentication
+
+### Authorization
+Role-based access control with:
+- `hasRole()` method on User model
+- `EnsureUserHasRole` middleware with role parameter
+- Example: `middleware('role:admin')` in routes
+
+### Optimized Database Queries
+```php
+// Eager loading to prevent N+1 problems
+Todo::with('status')->select(['id', 'title', 'description', 'status_id']);
+```
+
+### Query String Preservation
+Pagination maintains filter parameters:
+```php
+$todos->simplePaginate(9)->withQueryString();
+```
+
+## 🎨 Customization
+
+### Changing Database
+Edit `.env` to use MySQL or PostgreSQL:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
+
+### Adjusting Pagination
+Edit `TodoController.php`:
+```php
+// Change from 9 to your preferred number
+$todos = $todos->simplePaginate(9)->withQueryString();
+```
+
+### Adding More Statuses
+Add constants to `app/Models/Status.php` and create a migration to add the new status to the database.
+
+## 🐛 Known Issues & Future Improvements
+
+### Current Known Issues
+- ~~Pagination doesn't preserve filter query strings~~ ✅ **FIXED** with `withQueryString()`
+
+### Future Enhancements
+- [ ] Deployment with Docker Compose
+- [ ] User-specific todos (multi-tenancy)
+- [ ] Due dates and reminders
+- [ ] Search functionality
+- [ ] Email notifications
+- [ ] Export todos (PDF/CSV)
+
+## 📝 Code Style
+
+This project follows Laravel conventions and uses:
+- **PSR-12** coding standard
+- **Laravel Pint** for automatic code formatting
+
+Format code with:
+```bash
+./vendor/bin/pint
+```
+
+## 🤝 Contributing
+
+This is a learning/portfolio project. Feel free to fork and experiment!
+
+### Development Workflow
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Run tests (`composer test`)
+5. Format code (`./vendor/bin/pint`)
+6. Commit changes (`git commit -m 'Add amazing feature'`)
+7. Push to branch (`git push origin feature/amazing-feature`)
+8. Open a Pull Request
+
+## 📄 License
+
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## 👨‍💻 Author
+
+Built as a learning project to demonstrate:
+- Laravel 12 framework capabilities
+- Modern PHP development practices
+- Authentication and Authorization (AuthN/AuthZ)
+- RESTful resource controllers
+- Database optimization techniques
+- Frontend integration with TailwindCSS and Alpine.js
+
+---
+
+**Note:** This project is designed to be junior developer friendly, showcasing fundamental concepts in web development including authentication (AuthN) and authorization (AuthZ), CRUD operations, and best practices in Laravel development.
+

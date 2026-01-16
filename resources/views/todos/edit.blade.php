@@ -1,4 +1,4 @@
-<x-auth-layout :title="$title">
+<x-layouts.auth :title="$title">
     <x-container>
         <x-todo-form :todo="$todo" title="Edit" action="{{ route('todos.update', $todo) }}" method="PATCH" />
     </x-container>
@@ -7,4 +7,4 @@
             Your Todo could not be edited!
         </x-alerts.error-pop>
     @endif
-</x-auth-layout>
+</x-layouts.auth>

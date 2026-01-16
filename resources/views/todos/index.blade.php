@@ -1,4 +1,4 @@
-<x-auth-layout :title="$title">
+<x-layouts.auth :title="$title">
     <x-container class="py-12">
         <x-filter />
         <div class="grid md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-6 mb-12">
@@ -13,4 +13,4 @@
             Your Todo was created successfully!
         </x-alerts.success-pop>
     @endif
-</x-auth-layout>
+</x-layouts.auth>

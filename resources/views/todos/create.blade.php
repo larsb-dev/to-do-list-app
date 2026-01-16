@@ -1,4 +1,4 @@
-<x-auth-layout :title="$title">
+<x-layouts.auth :title="$title">
     <x-container>
         <x-todo-form title="Add" action="{{ route('todos.store') }}" method="POST" />
     </x-container>
@@ -7,4 +7,4 @@
             Your Todo could not be created!
         </x-alerts.error-pop>
     @endif
-</x-auth-layout>
+</x-layouts.auth>

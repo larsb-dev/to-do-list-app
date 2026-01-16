@@ -1,26 +1,28 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\layouts;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class AuthForm extends Component
+class Auth extends Component
 {
+    public string $title;
+
     /**
      * Create a new component instance.
      */
-    public function __construct(
-        public string $action = '',
-        public string $method = 'POST'
-    ) {}
+    public function __construct(string $title)
+    {
+        $this->title = $title;
+    }
 
     /**
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string
     {
-        return view('components.auth-form');
+        return view('layouts.auth');
     }
 }
