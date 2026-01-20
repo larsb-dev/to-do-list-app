@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTodoRequest;
+use App\Http\Requests\UpdateTodoRequest;
 use App\Models\Status;
 use App\Models\Todo;
 use Illuminate\Http\Request;
@@ -19,7 +21,7 @@ class TodoController extends Controller
         $todos = Todo::with('status')->select(['id', 'title', 'description', 'status_id']);
 
         if ($request->status) {
-            $statusId = Status::where('name', $request->status)->value('id');
+            $statusId = Status::getIdFromName($request->status);
             $todos->where('status_id', $statusId);
         }
 
@@ -44,15 +46,9 @@ class TodoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTodoRequest $request)
     {
-        $validated =  $request->validate([
-            'title' => 'required|max:80',
-            'description' => 'required|max:255',
-            'status_id' => 'required',
-        ]);
-
-        Todo::create($validated);
+        Todo::create($request->validated());
 
         return redirect()->route('todos.index')->with('status', 'Todo created successfully');
     }
@@ -80,15 +76,9 @@ class TodoController extends Controller
      * Update the specified resource in storage.
      */
     // Route model binding instead of $request and $id
-    public function update(Request $request, Todo $todo)
+    public function update(UpdateTodoRequest $request, Todo $todo)
     {
-        $validated = $request->validate([
-            'title' => 'required|max:80',
-            'description' => 'required|max:255',
-            'status_id' => 'required',
-        ]);
-
-        $todo->update($validated);
+        $todo->update($request->validated());
 
         return redirect()->route('todos.index');
     }

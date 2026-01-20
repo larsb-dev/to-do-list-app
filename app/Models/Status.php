@@ -15,4 +15,11 @@ class Status extends Model
     {
         return $this->hasMany(Todo::class);
     }
+
+    public static function getIdFromName(string $name): int
+    {
+        $status = Status::where('name', $name)->first();
+
+        return $status ? $status->id : 0;
+    }
 }

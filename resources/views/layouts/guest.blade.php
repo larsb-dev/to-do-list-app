@@ -7,8 +7,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-white dark:bg-gray-950">
-<main>
-    {{ $slot }}
-</main>
+    <main>
+        {{ $slot }}
+    </main>
 </body>
 </html>
