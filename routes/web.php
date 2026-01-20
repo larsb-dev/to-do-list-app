@@ -21,7 +21,7 @@ Route::middleware('guest')->group(function () {
     });
 });
 
-Route::middleware('guest')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::redirect('/', '/todos');
 
     Route::patch('/todos/{todo}/complete', [TodoController::class, 'complete'])

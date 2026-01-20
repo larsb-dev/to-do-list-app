@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateTodoRequest;
 use App\Models\Status;
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TodoController extends Controller
 {
@@ -25,7 +26,7 @@ class TodoController extends Controller
             $todos->where('status_id', $statusId);
         }
 
-        $todos = $todos->simplePaginate(9)->withQueryString();
+        $todos = $todos->where('user_id', $request->user()->id)->simplePaginate(9)->withQueryString();
 
         return view('todos.index', [
             'title' => 'Todos Index',
@@ -66,6 +67,8 @@ class TodoController extends Controller
      */
     public function edit(Todo $todo)
     {
+        Gate::authorize('update', $todo);
+
         return view('todos.edit', [
             'title' => 'Todos Edit',
             'todo' => $todo,
@@ -98,7 +101,9 @@ class TodoController extends Controller
      */
     public function complete(Todo $todo)
     {
-        $todo->update(['status_id' => 3]);
+        $todo->update(
+            ['status_id' => 3]
+        );
 
         return redirect()->route('todos.index');
     }
