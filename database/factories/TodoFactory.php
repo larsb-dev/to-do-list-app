@@ -21,6 +21,7 @@ class TodoFactory extends Factory
             'title' => fake()->company(),
             'description' => fake()->sentence(20),
             'status_id' => rand(1, 3),
+            'user_id' => rand(1, 10),
         ];
     }
 }
