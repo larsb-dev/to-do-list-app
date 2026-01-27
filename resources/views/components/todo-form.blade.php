@@ -2,7 +2,6 @@
 
 @php
   use App\Models\Status;
-  $commonStyles = 'block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring';
 @endphp
 
 <x-form :title="$title" action="{{ $action }}" method="{{ $method }}">
@@ -18,7 +17,9 @@
   <x-input-error :messages="$errors->get('description')" />
   <div>
     <x-form-label for="status">Status</x-form-label>
-    <select class="{{ $commonStyles }}" name="status_id" id="status">
+    <select
+      class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+      name="status_id" id="status">
       @foreach(Status::all() as $status)
         <option value="{{ $status->id }}" @selected($todo?->status_id === $status->id)>
           {{ Str::replace('_', ' ', $status->name) }}
