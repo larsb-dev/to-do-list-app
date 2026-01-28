@@ -10,6 +10,7 @@ A modern, full-featured todo list application built with Laravel 12, demonstrati
 ## 📋 Features
 
 ### Core Functionality
+
 - ✅ **CRUD Operations** - Create, Read, Update, and Delete todos
 - 🎯 **Status Management** - Track todos with three states: Not Started, In Progress, and Completed
 - 🔍 **Filtering** - Filter todos by status with query string preservation
@@ -17,12 +18,14 @@ A modern, full-featured todo list application built with Laravel 12, demonstrati
 - ⚡ **Quick Complete** - Mark todos as completed with a single click
 
 ### Authentication & Authorization
+
 - 🔐 **User Authentication** - Secure login and registration system
 - 👤 **Role-Based Access Control (RBAC)** - Custom middleware for role authorization
 - 🛡️ **Custom Authentication Middleware** - `EnsureUserIsAuthenticated` and `EnsureUserHasRole`
 - 🚪 **Protected Routes** - Guest and authenticated route groups
 
 ### Technical Highlights
+
 - 🚀 **Optimized Queries** - Eager loading to prevent N+1 problems
 - 🎨 **Modern UI** - Built with TailwindCSS 4.0 and Alpine.js
 - 🧩 **Blade Components** - Reusable UI components
@@ -33,18 +36,21 @@ A modern, full-featured todo list application built with Laravel 12, demonstrati
 ## 🛠️ Tech Stack
 
 ### Backend
+
 - **Laravel 12** - PHP framework
 - **PHP 8.2+** - Programming language
 - **SQLite** - Database (easily switchable to MySQL/PostgreSQL)
 - **Eloquent ORM** - Database abstraction
 
 ### Frontend
+
 - **TailwindCSS 4.0** - Utility-first CSS framework
 - **Alpine.js 3.15** - Lightweight JavaScript framework
 - **Vite 7.0** - Frontend build tool
 - **Blade Templates** - Laravel's templating engine
 
 ### Development Tools
+
 - **Pest PHP 4.3** - Testing framework
 - **Laravel Pint** - Code style fixer
 - **Laravel Debugbar** - Debugging tool
@@ -54,6 +60,7 @@ A modern, full-featured todo list application built with Laravel 12, demonstrati
 ## 📦 Installation
 
 ### Prerequisites
+
 - PHP 8.2 or higher
 - Composer
 - Node.js 18+ and npm
@@ -119,6 +126,7 @@ composer run dev
 ```
 
 This runs concurrently:
+
 - **Laravel development server** (http://localhost:8000)
 - **Queue listener**
 - **Log viewer (Pail)**
@@ -127,7 +135,9 @@ This runs concurrently:
 ## 📖 Usage
 
 ### Default User
+
 After running the seeder, you can log in with:
+
 - **Email:** test@example.com
 - **Password:** password
 
@@ -153,6 +163,7 @@ After running the seeder, you can log in with:
    - Click the "Delete" button and confirm
 
 ### Status Types
+
 - **Not Started** - Todo hasn't been started yet
 - **In Progress** - Currently working on the todo
 - **Completed** - Todo is finished
@@ -192,26 +203,33 @@ After running the seeder, you can log in with:
 ## 🔑 Key Features Explained
 
 ### Authentication System
+
 Custom authentication implementation with:
+
 - Registration with name, email, and password
 - Login/logout functionality
 - Protected routes using middleware
 - Session-based authentication
 
 ### Authorization
+
 Role-based access control with:
+
 - `hasRole()` method on User model
 - `EnsureUserHasRole` middleware with role parameter
 - Example: `middleware('role:admin')` in routes
 
 ### Optimized Database Queries
+
 ```php
 // Eager loading to prevent N+1 problems
 Todo::with('status')->select(['id', 'title', 'description', 'status_id']);
 ```
 
 ### Query String Preservation
+
 Pagination maintains filter parameters:
+
 ```php
 $todos->simplePaginate(9)->withQueryString();
 ```
@@ -219,7 +237,9 @@ $todos->simplePaginate(9)->withQueryString();
 ## 🎨 Customization
 
 ### Changing Database
+
 Edit `.env` to use MySQL or PostgreSQL:
+
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -230,21 +250,26 @@ DB_PASSWORD=your_password
 ```
 
 ### Adjusting Pagination
+
 Edit `TodoController.php`:
+
 ```php
 // Change from 9 to your preferred number
 $todos = $todos->simplePaginate(9)->withQueryString();
 ```
 
 ### Adding More Statuses
+
 Add constants to `app/Models/Status.php` and create a migration to add the new status to the database.
 
 ## 🐛 Known Issues & Future Improvements
 
 ### Current Known Issues
+
 - ~~Pagination doesn't preserve filter query strings~~ ✅ **FIXED** with `withQueryString()`
 
 ### Future Enhancements
+
 - [ ] Deployment with Docker Compose
 - [ ] User-specific todos (multi-tenancy)
 - [ ] Due dates and reminders
@@ -255,10 +280,12 @@ Add constants to `app/Models/Status.php` and create a migration to add the new s
 ## 📝 Code Style
 
 This project follows Laravel conventions and uses:
+
 - **PSR-12** coding standard
 - **Laravel Pint** for automatic code formatting
 
 Format code with:
+
 ```bash
 ./vendor/bin/pint
 ```
@@ -268,6 +295,7 @@ Format code with:
 This is a learning/portfolio project. Feel free to fork and experiment!
 
 ### Development Workflow
+
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Make your changes
@@ -284,6 +312,7 @@ This project is open-sourced software licensed under the [MIT license](https://o
 ## 👨‍💻 Author
 
 Built as a learning project to demonstrate:
+
 - Laravel 12 framework capabilities
 - Modern PHP development practices
 - Authentication and Authorization (AuthN/AuthZ)
@@ -294,4 +323,3 @@ Built as a learning project to demonstrate:
 ---
 
 **Note:** This project is designed to be junior developer friendly, showcasing fundamental concepts in web development including authentication (AuthN) and authorization (AuthZ), CRUD operations, and best practices in Laravel development.
-
