@@ -1,9 +1,5 @@
 <aside
   class="flex flex-col w-64 min-h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700 border-gray-200">
-  {{-- <a href="#">--}}
-    {{-- <img class="w-auto h-7" src="https://merakiui.com/images/logo.svg" alt="">--}}
-    {{-- </a>--}}
-
   <div class="flex flex-col justify-between flex-1 mt-6">
     <nav class="-mx-3 space-y-6 ">
       <div class="space-y-3 ">
@@ -29,6 +25,20 @@
           </svg>
           <span class="mx-2 text-sm font-medium">Add Todo</span>
         </a>
+      </div>
+      <div class="space-y-3 ">
+        <label class="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">profile</label>
+
+        <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+          href="{{ route('profile.edit') }}">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+          </svg>
+          <span class="mx-2 text-sm font-medium">Profile</span>
+        </a>
+
       </div>
     </nav>
     <div class="flex items-center justify-between mt-6">
