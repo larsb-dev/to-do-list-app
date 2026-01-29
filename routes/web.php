@@ -55,5 +55,3 @@ Route::middleware('auth')->group(function () {
 Route::get('/demo', function (Request $request) {
     return 'User has Admin rights '.$request->user()->hasRole('admin');
 })->middleware('role:admin');
-
-require __DIR__.'/auth.php';
