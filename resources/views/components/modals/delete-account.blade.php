@@ -7,7 +7,7 @@
     <x-input-error :messages="$errors->userDeletion->get('password')" />
     <div class="flex items-center justify-end space-x-4 mt-6">
       <x-links.outline :primary="false" href="{{ route('profile.edit') }}">Cancel</x-links.outline>
-      <x-buttons.filled class="bg-red-600 hover:bg-red-500 focus:ring-red-300">Delete</x-buttons.filled>
+      <x-buttons.danger>Delete</x-buttons.danger>
     </div>
   </x-form>
 </div>

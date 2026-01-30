@@ -13,8 +13,8 @@
         </div>
         <x-input-error :messages="$errors->get('email')" />
         <div class="flex items-center justify-end space-x-4 mt-6">
-          <x-buttons.delete @click.prevent="showDeleteModal = true" />
-          <x-buttons.filled :primary="false">Save</x-buttons.filled>
+          <x-buttons.trash @click.prevent="showDeleteModal = true" />
+          <x-buttons.secondary>Save</x-buttons.secondary>
         </div>
       </x-form>
       <x-modals.delete-account />

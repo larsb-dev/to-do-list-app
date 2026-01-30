@@ -29,9 +29,9 @@
   </div>
   <div class="flex items-center justify-end space-x-4 mt-6">
     @if (request()->routeIs('todos.edit'))
-      <x-buttons.delete form="delete-form" />
+      <x-buttons.trash form="delete-form" />
     @endif
-    <x-buttons.filled :primary="false">Save</x-buttons.filled>
+    <x-buttons.secondary>Save</x-buttons.secondary>
   </div>
 </x-form>
 

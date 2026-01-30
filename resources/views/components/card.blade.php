@@ -24,7 +24,7 @@
       <form action="{{ route('todos.complete', $todo) }}" method="POST">
         @csrf
         @method('PATCH')
-        <x-buttons.filled>Done</x-buttons.filled>
+        <x-buttons.primary>Done</x-buttons.primary>
       </form>
       <x-links.outline href="{{ route('todos.edit', $todo) }}">Edit</x-links.outline>
     </div>
