@@ -1,7 +1,7 @@
 <x-layouts.auth title="Edit Profile">
   <x-container>
     <div x-data="{ showDeleteModal: {{ $errors->userDeletion->any() ? 'true' : 'false' }} }">
-      <x-form :title="'Edit Profile'" action="{{ route('profile.update') }}" method="PATCH">
+      <x-form :title="'Edit Profile'" action="{{ route('profile') }}" method="PATCH">
         <div>
           <x-form-label for="name">Name</x-form-label>
           <x-form-input name="name" type="text" :value="old('name', auth()->user()->name)" required />

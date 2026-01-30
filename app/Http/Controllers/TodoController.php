@@ -10,93 +10,93 @@ use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
-  /**
-   * Display a listing of the resource.
-   */
-  public function index(Request $request)
-  {
-    $todos = Todo::with('status')->select(['id', 'title', 'description', 'status_id']);
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
+    {
+        $todos = Todo::with('status')->select(['id', 'title', 'description', 'status_id']);
 
-    if ($request->status) {
-      $statusId = Status::getIdFromName($request->status);
-      $todos->where('status_id', $statusId);
+        if ($request->status) {
+            $statusId = Status::getIdFromName($request->status);
+            $todos->where('status_id', $statusId);
+        }
+
+        $todos = $todos->where('user_id', $request->user()->id)->simplePaginate(9)->withQueryString();
+
+        return view('todos.index', [
+            'title' => 'Todos Index',
+            'todos' => $todos,
+        ]);
     }
 
-    $todos = $todos->where('user_id', $request->user()->id)->simplePaginate(9)->withQueryString();
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('todos.create');
+    }
 
-    return view('todos.index', [
-      'title' => 'Todos Index',
-      'todos' => $todos,
-    ]);
-  }
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreTodoRequest $request)
+    {
+        $request->user()->todos()->create($request->validated());
 
-  /**
-   * Show the form for creating a new resource.
-   */
-  public function create()
-  {
-    return view('todos.create');
-  }
+        return redirect()->route('todos.index')->with('status', 'todo-stored');
+    }
 
-  /**
-   * Store a newly created resource in storage.
-   */
-  public function store(StoreTodoRequest $request)
-  {
-    $request->user()->todos()->create($request->validated());
+    /**
+     * Display the specified resource.
+     */
+    public function show()
+    {
+        return redirect()->route('todos.index');
+    }
 
-    return redirect()->route('todos.index')->with('status', 'todo-stored');
-  }
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Todo $todo)
+    {
+        return view('todos.edit', [
+            'title' => 'Todos Edit',
+            'todo' => $todo,
+        ]);
+    }
 
-  /**
-   * Display the specified resource.
-   */
-  public function show()
-  {
-    return redirect()->route('todos.index');
-  }
+    /**
+     * Update the specified resource in storage.
+     */
+    // Route model binding instead of $request and $id
+    public function update(UpdateTodoRequest $request, Todo $todo)
+    {
+        $todo->update($request->validated());
 
-  /**
-   * Show the form for editing the specified resource.
-   */
-  public function edit(Todo $todo)
-  {
-    return view('todos.edit', [
-      'title' => 'Todos Edit',
-      'todo' => $todo,
-    ]);
-  }
+        return redirect()->route('todos.index');
+    }
 
-  /**
-   * Update the specified resource in storage.
-   */
-  // Route model binding instead of $request and $id
-  public function update(UpdateTodoRequest $request, Todo $todo)
-  {
-    $todo->update($request->validated());
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Todo $todo)
+    {
+        $todo->delete();
 
-    return redirect()->route('todos.index');
-  }
+        return redirect()->route('todos.index');
+    }
 
-  /**
-   * Remove the specified resource from storage.
-   */
-  public function destroy(Todo $todo)
-  {
-    $todo->delete();
+    /**
+     * Mark the status of the specified resource as complete.
+     */
+    public function complete(Todo $todo)
+    {
+        $todo->update(
+            ['status_id' => 3]
+        );
 
-    return redirect()->route('todos.index');
-  }
-
-  /**
-   * Mark the status of the specified resource as complete.
-   */
-  public function complete(Todo $todo)
-  {
-    $todo->update(
-      ['status_id' => 3]
-    );
-
-    return redirect()->route('todos.index');
-  }
+        return redirect()->route('todos.index');
+    }
 }
