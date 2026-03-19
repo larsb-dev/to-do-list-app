@@ -6,7 +6,10 @@ use App\Http\Requests\StoreTodoRequest;
 use App\Http\Requests\UpdateTodoRequest;
 use App\Models\Status;
 use App\Models\Todo;
+use App\Notifications\TodoCreated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class TodoController extends Controller
 {
@@ -15,14 +18,16 @@ class TodoController extends Controller
      */
     public function index(Request $request)
     {
-        $todos = Todo::with('status')->select(['id', 'title', 'description', 'status_id']);
+        $todos = $request->user()->todos()
+            ->with('status')
+            ->select(['id', 'title', 'description', 'status_id']);
 
         if ($request->status) {
             $statusId = Status::getIdFromName($request->status);
             $todos->where('status_id', $statusId);
         }
 
-        $todos = $todos->where('user_id', $request->user()->id)->simplePaginate(9)->withQueryString();
+        $todos = $todos->simplePaginate(9)->withQueryString();
 
         return view('todos.index', [
             'title' => 'Todos Index',
@@ -43,7 +48,10 @@ class TodoController extends Controller
      */
     public function store(StoreTodoRequest $request)
     {
-        $request->user()->todos()->create($request->validated());
+        $todo = Auth::user()->todos()->create($request->validated());
+        // $request->user()->todos()->create($request->validated());
+
+        Auth::user()->notify(new TodoCreated($todo));
 
         return redirect()->route('todos.index')->with('status', 'todo-stored');
     }
@@ -61,6 +69,8 @@ class TodoController extends Controller
      */
     public function edit(Todo $todo)
     {
+        Gate::authorize('update', $todo);
+
         return view('todos.edit', [
             'title' => 'Todos Edit',
             'todo' => $todo,
@@ -73,6 +83,8 @@ class TodoController extends Controller
     // Route model binding instead of $request and $id
     public function update(UpdateTodoRequest $request, Todo $todo)
     {
+        Gate::authorize('update', $todo);
+
         $todo->update($request->validated());
 
         return redirect()->route('todos.index');
@@ -83,6 +95,8 @@ class TodoController extends Controller
      */
     public function destroy(Todo $todo)
     {
+        Gate::authorize('update', $todo);
+
         $todo->delete();
 
         return redirect()->route('todos.index');
@@ -93,6 +107,8 @@ class TodoController extends Controller
      */
     public function complete(Todo $todo)
     {
+        Gate::authorize('complete', $todo);
+
         $todo->update(
             ['status_id' => 3]
         );

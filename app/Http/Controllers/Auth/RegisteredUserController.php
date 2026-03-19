@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AccountCreated;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 
@@ -32,7 +35,14 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Password::defaults()], // password_confirmation input field
         ]);
 
-        $user = User::create($validated);
+        $user = User::create([
+            ...$validated,
+            'role' => 'user',
+        ]);
+
+        event(new Registered($user));
+
+        // Mail::to($user)->send(new AccountCreated($user));
 
         Auth::login($user);
 

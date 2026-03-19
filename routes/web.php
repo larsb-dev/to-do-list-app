@@ -1,39 +1,27 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TodoController;
-use Illuminate\Http\Request;
+use App\Mail\AccountCreated;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')->group(function () {
-    Route::controller(RegisteredUserController::class)->group(function () {
-        Route::get('/register', 'create')->name('register');
+Route::get('/mailable', function () {
+    $user = request()->user();
 
-        Route::post('/register', 'store');
-    });
-
-    Route::controller(AuthenticatedSessionController::class)->group(function () {
-        Route::get('/login', 'create')->name('login');
-
-        Route::post('/login', 'store');
-    });
+    Mail::to($user)->send(new AccountCreated($user));
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::redirect('/', '/todos');
 
     Route::patch('/todos/{todo}/complete', [TodoController::class, 'complete'])
-        ->can('complete', 'todo')
         ->name('todos.complete');
 
     Route::get('/todos/{todo}/edit', [TodoController::class, 'edit'])
-        ->can('update', 'todo')
         ->name('todos.edit');
 
     Route::patch('/todos/{todo}', [TodoController::class, 'update'])
-        ->can('update', 'todo')
         ->name('todos.update');
 
     Route::delete('/todos/{todo}', [TodoController::class, 'destroy'])
@@ -48,7 +36,7 @@ Route::middleware('auth')->group(function () {
     ]);
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
 
     Route::patch('/profile', [ProfileController::class, 'update']);
@@ -56,10 +44,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy']);
 });
 
-Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy'])
-    ->middleware('auth')
-    ->name('logout');
-
-Route::get('/demo', function (Request $request) {
-    return 'User has Admin rights '.$request->user()->hasRole('admin');
-})->middleware('role:admin');
+require __DIR__.'/auth.php';

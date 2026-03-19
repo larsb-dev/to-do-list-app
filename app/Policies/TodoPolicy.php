@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Todo;
 use App\Models\User;
+use Illuminate\Auth\Access\Response;
 
 class TodoPolicy
 {
@@ -12,7 +13,7 @@ class TodoPolicy
      */
     private function isOwner(User $user, Todo $todo): bool
     {
-        return $todo->user->is($user);
+        return $user->is($todo->user);
     }
 
     /**
@@ -26,9 +27,11 @@ class TodoPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Todo $todo): bool
+    public function update(User $user, Todo $todo): Response
     {
-        return $this->isOwner($user, $todo);
+        return $this->isOwner($user, $todo)
+            ? Response::allow()
+            : Response::denyAsNotFound();
     }
 
     /**
