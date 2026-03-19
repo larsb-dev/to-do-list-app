@@ -8,6 +8,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write  # needed for Azure OIDC login
+      contents: read   # needed for checkout
 
     steps:
       # 1. Checkout code
@@ -37,7 +40,6 @@ jobs:
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
-          client-secret: ${{ secrets.AZUREAPPSERVICE_CLIENTSECRET }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
 
