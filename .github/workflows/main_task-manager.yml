@@ -8,9 +8,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write  # needed for Azure OIDC login
-      contents: read   # needed for checkout
 
     steps:
       # 1. Checkout code
@@ -39,9 +36,10 @@ jobs:
       - name: Azure Login
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C825937D3745432D8BDB531FB454EABB }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_3B2D779D730B422CAFB0EDF36ED5202D }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B606F2AB5F9C43FDAF13B713B3354D4D }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
+          client-secret: ${{ secrets.AZUREAPPSERVICE_CLIENTSECRET }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
 
       # 6. Deploy
       - name: Deploy to Azure Web App
