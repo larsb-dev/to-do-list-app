@@ -37,10 +37,12 @@ class TodoCreated extends Notification implements ShouldQueue
     {
         $uri = url('/todos/');
 
+        sleep(10);
+
         return (new MailMessage)
-            ->greeting('Hello!')
-            ->line('The created a new task.')
-            ->line('Your task is called '.$this->todo->title);
+            ->greeting('Hello ' . $this->todo->user->name . '!')
+            ->line('You just created a new task.')
+            ->line('Your task is called ' . $this->todo->title);
     }
 
     /**
